@@ -19,16 +19,26 @@
 						<h4>Login</h4>
 					</div>
 					
+					<%
+						String msg = (String)session.getAttribute("login-fail");
+						if(msg != null) {
+					%>
+							<div class="alert alert-danger" role="alert"><%= msg%></div>
+					<%
+							session.removeAttribute("login-fail");
+						}
+					%>
+					
 					<div class="card-body">
-						<form>						
+						<form action="login" method="post">						
 							<div class="form-group">
 								<label>Enter Email</label>
-								<input type="email" class="form-control" aria-describedby="emailHelp"> 
+								<input type="email" class="form-control" aria-describedby="emailHelp" name="email"> 
 							</div>
 
 							<div class="form-group">
 								<label>Enter Password</label>
-								<input type="password" class="form-control">
+								<input type="password" class="form-control" name="password">
 							</div>
 
 							<button type="submit" class="btn btn-primary badge-pill btn-block">Login</button>

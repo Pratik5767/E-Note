@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Register Page</title>
-	<%@include file="all_component/allCss.jsp"%>
+<meta charset="UTF-8">
+<title>Register Page</title>
+<%@include file="all_component/allCss.jsp"%>
 </head>
 <body>
 	<%@include file="all_component/navbar.jsp"%>
@@ -19,24 +19,44 @@
 						<h4>Registration</h4>
 					</div>
 					
+					<%
+						String msg = (String)session.getAttribute("reg-success");
+						if(msg != null) {
+					%>
+							<div class="alert alert-success" role="alert"><%= msg%> <a href="login.jsp">login</a></div>
+					<%
+							session.removeAttribute("reg-success");
+						}
+					%>
+					
+					<%
+						String failedMsg = (String)session.getAttribute("failed-msg");
+						if(failedMsg != null) {
+					%>
+							<div class="alert alert-danger" role="alert"><%= failedMsg%></div>
+					<%
+							session.removeAttribute("failed-msg");
+						}
+					%>
 					<div class="card-body">
-						<form>
+						<form action="register" method="post">
 							<div class="form-group">
-								<label>Enter Full Name</label>
-								<input type="text" class="form-control">
-							</div>
-						
-							<div class="form-group">
-								<label>Enter Email</label>
-								<input type="email" class="form-control" aria-describedby="emailHelp"> 
+								<label>Enter Full Name</label> <input type="text"
+									class="form-control" name="fname">
 							</div>
 
 							<div class="form-group">
-								<label>Enter Password</label>
-								<input type="password" class="form-control">
+								<label>Enter Email</label> <input type="email"
+									class="form-control" aria-describedby="emailHelp" name="email">
 							</div>
 
-							<button type="submit" class="btn btn-primary badge-pill btn-block">Register</button>
+							<div class="form-group">
+								<label>Enter Password</label> <input type="password"
+									class="form-control" name="password">
+							</div>
+
+							<button type="submit"
+								class="btn btn-primary badge-pill btn-block">Register</button>
 						</form>
 					</div>
 				</div>

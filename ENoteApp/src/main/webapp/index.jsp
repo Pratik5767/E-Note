@@ -13,7 +13,7 @@
 }
 </style>
 <meta charset="UTF-8">
-<title>Home Page</title>
+<title>Welcome page</title>
 <%@include file="all_component/allCss.jsp"%>
 </head>
 <body>
