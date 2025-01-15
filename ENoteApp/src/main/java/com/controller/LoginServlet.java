@@ -25,12 +25,15 @@ public class LoginServlet extends HttpServlet {
 		user.setPassword(password);
 
 		UserDao userDao = new UserDao(JdbcUtils.getConnection());
-		boolean result = userDao.login(user);
+		User newUser = userDao.login(user);
 
-		if (result) {
+		HttpSession session = null;
+		if (newUser != null) {
+			session = request.getSession();
+			session.setAttribute("login-details", newUser);
 			response.sendRedirect("home.jsp");
 		} else {
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			session.setAttribute("login-fail", "Invalid UserName or Password");
 			response.sendRedirect("login.jsp");
 		}

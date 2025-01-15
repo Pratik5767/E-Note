@@ -39,7 +39,8 @@ public class UserDao {
 		return false;
 	}
 
-	public boolean login(User user) {
+	public User login(User user) {
+		User newUser = null;
 		try {
 			preparedStatement = connection.prepareStatement(loginQuery);
 
@@ -54,12 +55,16 @@ public class UserDao {
 
 			if (resultSet != null) {
 				if (resultSet.next()) {
-					return true;
+					newUser = new User();
+					newUser.setId(resultSet.getInt("id"));
+					newUser.setFname(resultSet.getString("fname"));
+					newUser.setEmail(resultSet.getString("email"));
+					newUser.setPassword(resultSet.getString("password"));
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return false;
+		return newUser;
 	}
 }

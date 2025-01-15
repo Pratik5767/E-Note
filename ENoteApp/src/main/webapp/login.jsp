@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Register Page</title>
+	<title>Login Page</title>
 	<%@include file="all_component/allCss.jsp"%>
 </head>
 <body>
