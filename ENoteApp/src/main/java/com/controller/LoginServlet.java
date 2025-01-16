@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.DAO.UserDao;
+import com.POJO.User;
 import com.db.JdbcUtils;
-import com.model.User;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {

@@ -1,4 +1,4 @@
-package com.model;
+package com.POJO;
 
 public class User {
 	private int id;

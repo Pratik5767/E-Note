@@ -1,4 +1,4 @@
-<%@page import="com.model.User"%>
+<%@page import="com.POJO.User"%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-custom navbar-custom">
 	<a class="navbar-brand" href="index.jsp"><i class="fa fa-book"
 		aria-hidden="true"></i> E Notes</a>
