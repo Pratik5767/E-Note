@@ -19,7 +19,7 @@ public class PostDao {
 			if (connection != null) {
 				preparedStatement = connection.prepareStatement(InsertQuery);
 			}
-			
+
 			if (preparedStatement != null) {
 				preparedStatement.setString(1, title);
 				preparedStatement.setString(2, content);
@@ -27,7 +27,7 @@ public class PostDao {
 			}
 
 			int count = preparedStatement.executeUpdate();
-			
+
 			if (count == 1) {
 				return true;
 			}

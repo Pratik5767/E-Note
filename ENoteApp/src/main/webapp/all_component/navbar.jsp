@@ -12,16 +12,16 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active"><a class="nav-link" href="index.jsp">
+			<li class="nav-item active"><a class="nav-link" href="home.jsp">
 					<i class="fa fa-home" aria-hidden="true"></i> Home <span
 					class="sr-only">(current)</span>
 			</a></li>
 
-			<li class="nav-item"><a class="nav-link" href="#"> <i
+			<li class="nav-item"><a class="nav-link" href="addNotes.jsp"> <i
 					class="fa fa-plus-circle" aria-hidden="true"></i> Add Note
 			</a></li>
 
-			<li class="nav-item"><a class="nav-link" href="#"> <i
+			<li class="nav-item"><a class="nav-link" href="showNotes.jsp"> <i
 					class="fa fa-eye" aria-hidden="true"></i> Show Note
 			</a></li>
 		</ul>
@@ -36,7 +36,7 @@
 			class="fa fa-user-circle-o" aria-hidden="true"></i> <%= user.getFname()%>
 		</a> 
 		<a class="btn btn-light my-2 my-sm-0 mr-2" type="submit"
-			href="register.jsp"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+			href="logout"> <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
 		</a>
 
 		<!-- Modal -->
