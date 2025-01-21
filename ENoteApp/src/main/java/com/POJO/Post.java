@@ -1,12 +1,12 @@
 package com.POJO;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Post {
 	private int id;
 	private String title;
 	private String content;
-	private Date date;
+	private Timestamp date;
 	private User user;
 
 	public int getId() {
@@ -33,12 +33,12 @@ public class Post {
 		this.content = content;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(Timestamp timestamp) {
+		this.date = timestamp;
 	}
 
 	public User getUser() {
