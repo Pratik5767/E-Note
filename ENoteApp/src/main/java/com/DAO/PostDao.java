@@ -16,7 +16,9 @@ public class PostDao {
 	
 	private static final String InsertQuery = "INSERT INTO post (`title`,`content`,`uid`)VALUES(?,?,?)";
 	private static final String SelectQuery = "SELECT `id`,`title`,`content`,`date` FROM post WHERE uid = ? ORDER BY id DESC";
-
+	private static final String SelectByIdQuery = "SELECT `id`,`title`,`content`,`date` FROM post WHERE id = ?";
+	private static final String UpdateQuery = "UPDATE post SET title=?, content=? WHERE id=?";
+	
 	public PostDao(Connection connection) {
 		this.connection = connection;
 	}
@@ -77,5 +79,60 @@ public class PostDao {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public Post getDataById(int noteId) {
+		Post post = null;
+		try {
+			if (connection != null) {
+				preparedStatement = connection.prepareStatement(SelectByIdQuery);
+			}
+			
+			if (preparedStatement != null) {
+				preparedStatement.setInt(1, noteId);
+			}
+			
+			if (preparedStatement != null) {
+				resultSet = preparedStatement.executeQuery();
+			}
+			
+			if (resultSet != null) {
+				if (resultSet.next()) {
+					post = new Post();
+					post.setId(resultSet.getInt(1));
+					post.setTitle(resultSet.getString(2));
+					post.setContent(resultSet.getString(3));;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return post;
+	}
+	
+	public boolean PostUpdate(int noteId, String title, String content) {
+		try {
+			if (connection != null) {
+				preparedStatement = connection.prepareStatement(UpdateQuery);
+			}
+			
+			if (preparedStatement != null) {
+				preparedStatement.setString(1, title);
+				preparedStatement.setString(2, content);
+				preparedStatement.setInt(3, noteId);
+			}
+			
+			int count = preparedStatement.executeUpdate();
+			if (count == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

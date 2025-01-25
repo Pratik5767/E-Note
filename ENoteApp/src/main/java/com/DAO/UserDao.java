@@ -21,7 +21,9 @@ public class UserDao {
 
 	public boolean register(User user) {
 		try {
-			preparedStatement = connection.prepareStatement(registerQuery);
+			if(connection != null) {
+				preparedStatement = connection.prepareStatement(registerQuery);				
+			}
 
 			if (preparedStatement != null) {
 				preparedStatement.setString(1, user.getFname());
@@ -42,7 +44,9 @@ public class UserDao {
 	public User login(User user) {
 		User newUser = null;
 		try {
-			preparedStatement = connection.prepareStatement(loginQuery);
+			if (connection != null) {
+				preparedStatement = connection.prepareStatement(loginQuery);				
+			}
 
 			if (preparedStatement != null) {
 				preparedStatement.setString(1, user.getEmail());

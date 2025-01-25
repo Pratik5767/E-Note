@@ -22,6 +22,16 @@ if (users == null) {
 <body>
 	<%@include file="all_component/navbar.jsp"%>
 
+	<%
+	String updatemsg = (String) session.getAttribute("update-msg");
+	if (updatemsg != null) {
+	%>
+		<div class="alert alert-success" role="alert"><%=updatemsg%></div>
+	<%
+	session.removeAttribute("update-msg");
+	}
+	%>
+
 	<div class="container">
 		<h1 class="text-center mt-2" style="color: blue">SHOW NOTES</h1>
 
@@ -38,27 +48,31 @@ if (users == null) {
 						style="max-width: 150px" />
 
 					<div class="card-body p-4">
-						<h5 class="card-title"><%= post.getTitle()%></h5>
-						<p><%= post.getContent() %> .</p>
-
-						<p>
-							<b class="text-success">Published By: </b>
-							<b class="text-primary"><%= users.getFname() %></b>
+						<h5 class="card-title"><%=post.getTitle()%></h5>
+						<p><%=post.getContent()%>
+							.
 						</p>
 
 						<p>
-							<b class="text-success">Published Date: </b>
-							<b class="text-primary"><%= post.getDate() %></b>
+							<b class="text-success">Published By: </b> <b
+								class="text-primary"><%=users.getFname()%></b>
+						</p>
+
+						<p>
+							<b class="text-success">Published Date: </b> <b
+								class="text-primary"><%=post.getDate()%></b>
 						</p>
 
 						<div class="container text-center mt-2">
-							<a href="delete?note_id=" class="btn btn-danger">Delete</a> <a
-								href="edit?note_id=" class="btn btn-primary">Edit</a>
+							<a href="delete?note_id=<%=post.getId()%>"
+								class="btn btn-danger">Delete</a> <a
+								href="edit.jsp?note_id=<%=post.getId()%>"
+								class="btn btn-primary">Edit</a>
 						</div>
 					</div>
 				</div>
 				<%
-					}
+				}
 				}
 				%>
 			</div>
