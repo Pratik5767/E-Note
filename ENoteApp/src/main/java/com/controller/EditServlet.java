@@ -22,7 +22,7 @@ public class EditServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		
 		PostDao dao = new PostDao(JdbcUtils.getConnection());
-		boolean msg = dao.PostUpdate(noteId, title, content);
+		boolean msg = dao.UpdatePost(noteId, title, content);
 		
 		HttpSession session = null;
 		if (msg) {
@@ -30,7 +30,9 @@ public class EditServlet extends HttpServlet {
 			session.setAttribute("update-msg", "Notes Updated SuccessFully");
 			response.sendRedirect("showNotes.jsp");
 		} else {
-			System.out.println("Data updation failed...");
+			session = request.getSession();
+			session.setAttribute("error-msg", "Something Went Wrong");
+			response.sendRedirect("showNotes");
 		}
 	}
 }

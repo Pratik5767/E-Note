@@ -26,9 +26,19 @@ if (users == null) {
 	String updatemsg = (String) session.getAttribute("update-msg");
 	if (updatemsg != null) {
 	%>
-		<div class="alert alert-success" role="alert"><%=updatemsg%></div>
+	<div class="alert alert-success" role="alert"><%=updatemsg%></div>
 	<%
 	session.removeAttribute("update-msg");
+	}
+	%>
+	
+	<%
+	String errormsg = (String) session.getAttribute("error-msg");
+	if (errormsg != null) {
+	%>
+	<div class="alert alert-danger" role="alert"><%=errormsg%></div>
+	<%
+	session.removeAttribute("error-msg");
 	}
 	%>
 
@@ -49,9 +59,7 @@ if (users == null) {
 
 					<div class="card-body p-4">
 						<h5 class="card-title"><%=post.getTitle()%></h5>
-						<p><%=post.getContent()%>
-							.
-						</p>
+						<p><%=post.getContent()%>.</p>
 
 						<p>
 							<b class="text-success">Published By: </b> <b
@@ -64,15 +72,14 @@ if (users == null) {
 						</p>
 
 						<div class="container text-center mt-2">
-							<a href="delete?note_id=<%=post.getId()%>"
-								class="btn btn-danger">Delete</a> <a
-								href="edit.jsp?note_id=<%=post.getId()%>"
+							<a href="delete?note_id=<%=post.getId()%>" class="btn btn-danger">Delete</a>
+							<a href="edit.jsp?note_id=<%=post.getId()%>"
 								class="btn btn-primary">Edit</a>
 						</div>
 					</div>
 				</div>
 				<%
-				}
+					}
 				}
 				%>
 			</div>

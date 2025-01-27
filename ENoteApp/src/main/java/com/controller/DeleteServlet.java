@@ -1,7 +1,6 @@
 package com.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,23 +11,20 @@ import javax.servlet.http.HttpSession;
 import com.DAO.PostDao;
 import com.db.JdbcUtils;
 
-@WebServlet("/addNotes")
-public class AddNotesServlet extends HttpServlet {
+@WebServlet("/delete")
+public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int uid = Integer.parseInt(request.getParameter("uid"));
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int noteId = Integer.parseInt(request.getParameter("note_id"));
 		
-		PostDao postDao = new PostDao(JdbcUtils.getConnection());
-		boolean result = postDao.addNotes(title, content, uid);	
+		PostDao dao = new PostDao(JdbcUtils.getConnection());
+		boolean msg = dao.DeletePost(noteId);
 		
 		HttpSession session = null;
-		if (result) {
+		if (msg) {
 			session = request.getSession();
-			session.setAttribute("update-msg", "Note Added SuccessFully");
+			session.setAttribute("update-msg", "Note Deleted Successfully");
 			response.sendRedirect("showNotes.jsp");
 		} else {
 			session = request.getSession();

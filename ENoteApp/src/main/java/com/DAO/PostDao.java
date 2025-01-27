@@ -15,9 +15,10 @@ public class PostDao {
 	private ResultSet resultSet = null;
 	
 	private static final String InsertQuery = "INSERT INTO post (`title`,`content`,`uid`)VALUES(?,?,?)";
-	private static final String SelectQuery = "SELECT `id`,`title`,`content`,`date` FROM post WHERE uid = ? ORDER BY id DESC";
+	private static final String SelectAllQuery = "SELECT `id`,`title`,`content`,`date` FROM post WHERE uid = ? ORDER BY id DESC";
 	private static final String SelectByIdQuery = "SELECT `id`,`title`,`content`,`date` FROM post WHERE id = ?";
 	private static final String UpdateQuery = "UPDATE post SET title=?, content=? WHERE id=?";
+	private static final String deleteQuery = "DELETE FROM post WHERE id = ?";
 	
 	public PostDao(Connection connection) {
 		this.connection = connection;
@@ -51,7 +52,7 @@ public class PostDao {
 		Post post = null;
 		try {
 			if (connection != null) {
-				preparedStatement = connection.prepareStatement(SelectQuery);
+				preparedStatement = connection.prepareStatement(SelectAllQuery);
 			}
 			
 			if (preparedStatement != null) {
@@ -112,7 +113,7 @@ public class PostDao {
 		return post;
 	}
 	
-	public boolean PostUpdate(int noteId, String title, String content) {
+	public boolean UpdatePost(int noteId, String title, String content) {
 		try {
 			if (connection != null) {
 				preparedStatement = connection.prepareStatement(UpdateQuery);
@@ -131,6 +132,28 @@ public class PostDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean DeletePost(int noteId) {
+		try {
+			if (connection != null) {
+				preparedStatement = connection.prepareStatement(deleteQuery);
+			}
+			
+			if (preparedStatement != null) {
+				preparedStatement.setInt(1, noteId);
+			}
+			
+			int count = preparedStatement.executeUpdate();
+			if (count == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return false;
