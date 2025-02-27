@@ -59,7 +59,7 @@ CREATE TABLE notes (
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-repo-url.git
+   git clone https://github.com/Pratik5767/E-Note.git
    ```
 2. Import the project into your IDE (Eclipse/IntelliJ).
 3. Configure the MySQL database:
